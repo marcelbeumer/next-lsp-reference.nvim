@@ -1,6 +1,6 @@
 local M = {}
 
-local jump_to_lsp_reference = function(reverse)
+local jump = function(backward)
   vim.lsp.buf.references(nil, {
     on_list = function(args)
       local fname = vim.api.nvim_buf_get_name(0)
@@ -23,9 +23,9 @@ local jump_to_lsp_reference = function(reverse)
         return a.lnum < b.lnum or (a.lnum == b.lnum and a.col < b.col)
       end)
 
-      local target_idx = reverse and #refs or 1
+      local target_idx = backward and #refs or 1
 
-      if reverse then
+      if backward then
         for i = #refs, 1, -1 do
           local ref = refs[i]
           if ref.lnum < curr_pos.lnum or (ref.lnum == curr_pos.lnum and ref.col < curr_pos.col) then
@@ -48,12 +48,12 @@ local jump_to_lsp_reference = function(reverse)
   })
 end
 
-M.next = function()
-  jump_to_lsp_reference(false)
+M.forward = function()
+  jump(false)
 end
 
-M.prev = function()
-  jump_to_lsp_reference(true)
+M.backward = function()
+  jump(true)
 end
 
 return M
