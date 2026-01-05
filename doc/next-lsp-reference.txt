@@ -1,0 +1,18 @@
+*next-lsp-reference.txt*
+
+MIT License Copyright (c) 2025 Marcel Beumer
+
+------------------------------------------------------------------------------
+                                                           *next-lsp-reference*
+
+Jump to the next LSP reference under cursor. No setup needed other than your
+own mappings.
+
+# Example mappings ~
+>lua
+  vim.keymap.set("n", "]r", require("next-lsp-reference").forward, {})
+  vim.keymap.set("n", "[r", require("next-lsp-reference").backward, {})
+<
+Suggestion: put these in your LspAttach autocmd callback instead.
+
+ vim:tw=78:ts=8:noet:ft=help:norl:
